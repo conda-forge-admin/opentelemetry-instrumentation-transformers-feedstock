@@ -33,13 +33,14 @@ requirements:
     - transformers >=4.51.3
 
 tests:
-  - python:
-      imports:
-        - opentelemetry.instrumentation.transformers
-      pip_check: true
-      python_version:
-        - ${{ python_min }}.*
-        - "*"
+  - requirements:
+      run:
+        - python ${{ python_min }}.*
+        - pip
+        - transformers
+    script:
+      - python -c "import opentelemetry.instrumentation.transformers"
+      - python -m pip check
 
 about:
   summary: OpenTelemetry transformers instrumentation
